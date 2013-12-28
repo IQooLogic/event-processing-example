@@ -16,8 +16,8 @@ public class Reader implements Runnable {
         this.latch = latch;
     }
 
-    public void read() throws Exception {
-        File file = new File("numbers.txt");
+    void read(String fileName) throws Exception {
+        File file = new File(fileName);
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
         while ((line = br.readLine()) != null) {
@@ -30,7 +30,7 @@ public class Reader implements Runnable {
     @Override
     public void run() {
         try {
-            read();
+            read("numbers.txt");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

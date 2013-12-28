@@ -20,7 +20,7 @@ public class Bootstrap {
 
     public void start() throws IOException {
         long startTime = System.currentTimeMillis();
-        Iterable<String> numbers = reader.getNumbers();
+        Iterable<String> numbers = reader.getNumbers("numbers.txt");
         StringBuilder valuesWithPrimeFactorCounter = new StringBuilder();
         StringBuilder exceptions = new StringBuilder();
         for (String number : numbers) {

@@ -21,6 +21,10 @@ public class Writer implements Runnable {
 
     @Override
     public void run() {
+        write();
+    }
+
+    void write() {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))) {
             while (true) {
                 if (latch.getCount() == 0 && queue.size() == 0) {

@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class Reader {
 
-    public Iterable<String> getNumbers() throws IOException {
-        String fileContent = FileUtils.readFileToString(new File("numbers.txt"));
+    public Iterable<String> getNumbers(String fileName) throws IOException {
+        String fileContent = FileUtils.readFileToString(new File(fileName));
         return Splitter.on("\n").omitEmptyStrings().split(fileContent);
     }
 }
