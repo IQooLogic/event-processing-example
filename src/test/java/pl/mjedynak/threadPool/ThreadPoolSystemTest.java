@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -26,14 +27,26 @@ public class ThreadPoolSystemTest {
         new Bootstrap().start();
 
         // then
+        assertResultFile();
+        assertExceptionFile();
+        assertSummaryFile();
+    }
+
+    private void assertResultFile() throws IOException {
         List<String> lines = FileUtils.readLines(new File(Bootstrap.PRIME_FACTOR_FILE));
         assertThat(lines.size(), is(9900));
         assertThat(lines.contains("5556634922133,5"), is(true));
+    }
+
+    private void assertExceptionFile() throws IOException {
         File exceptionsFile = new File(Bootstrap.EXCEPTIONS_FILE);
         assertThat(exceptionsFile.exists(), is(true));
         String exceptionsFileContent = FileUtils.readFileToString(exceptionsFile);
         assertThat(exceptionsFileContent, containsString("badData1"));
         assertThat(exceptionsFileContent, containsString("badData2"));
+    }
+
+    private void assertSummaryFile() {
         assertThat(new File(Bootstrap.SUMMARY_FILE).exists(), is(true));
     }
 }
