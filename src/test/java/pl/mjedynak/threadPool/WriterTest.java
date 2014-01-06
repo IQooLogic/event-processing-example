@@ -49,9 +49,9 @@ public class WriterTest {
         File tempFile = TempFileCreator.createTempFile("");
         Writer writer = new Writer(queue, latch, tempFile.getAbsolutePath());
         String line = "line";
-        given(latch.getCount()).willReturn(1L).willReturn(0L);
-        given(queue.size()).willReturn(1).willReturn(0);
-        given(queue.poll(1, TimeUnit.SECONDS)).willReturn(line).willReturn(null);
+        given(latch.getCount()).willReturn(1L, 0L);
+        given(queue.size()).willReturn(1, 0);
+        given(queue.poll(1, TimeUnit.SECONDS)).willReturn(line);
 
         // when
         writer.write();

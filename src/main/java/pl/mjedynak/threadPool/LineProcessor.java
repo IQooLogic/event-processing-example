@@ -26,10 +26,16 @@ public class LineProcessor implements Runnable {
 
     @Override
     public void run() {
+        process();
+    }
+
+    void process() {
         while (true) {
             String number = null;
             try {
-                if (inputLatch.getCount() == 0 && inputQueue.size() == 0) {
+                long latchCount = inputLatch.getCount();
+                int queueSize = inputQueue.size();
+                if (latchCount == 0 && queueSize == 0) {
                     outputLatch.countDown();
                     return;
                 }

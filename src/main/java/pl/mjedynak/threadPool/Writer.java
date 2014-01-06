@@ -27,7 +27,9 @@ public class Writer implements Runnable {
     void write() {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))) {
             while (true) {
-                if (latch.getCount() == 0 && queue.size() == 0) {
+                long latchCount = latch.getCount();
+                int queueSize = queue.size();
+                if (latchCount == 0 && queueSize == 0) {
                     return;
                 }
                 String line = queue.poll(1, TimeUnit.SECONDS);
