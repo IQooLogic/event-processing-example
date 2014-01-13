@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class SynchronousWaySystemTest {
+public class SynchronousProcessingSystemTest {
 
     @Before
     public void setUp() {
