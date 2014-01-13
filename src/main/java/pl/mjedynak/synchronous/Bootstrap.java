@@ -44,6 +44,4 @@ public class Bootstrap {
         logger.debug(summary);
         writer.write(SUMMARY_FILE, summary);
     }
-
-
 }

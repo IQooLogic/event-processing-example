@@ -2,11 +2,11 @@ package pl.mjedynak;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.math3.random.RandomDataGenerator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+
+import static java.lang.String.valueOf;
 
 public class DataGenerator {
 
@@ -17,9 +17,9 @@ public class DataGenerator {
         for (int i = 0; i < 10000; i++) {
             String number;
             if (i % 100 == 0) {
-                number = String.valueOf(generator.nextLong(-9_999_999_999_999L, -1_000_000_000_000L));
+                number = valueOf(generator.nextLong(-9_999_999_999_999L, -1_000_000_000_000L));
             } else {
-                number = String.valueOf(generator.nextLong(1_000_000_000_000L, 9_999_999_999_999L));
+                number = valueOf(generator.nextLong(1_000_000_000_000L, 9_999_999_999_999L));
             }
             sb.append(number).append("\n");
         }
