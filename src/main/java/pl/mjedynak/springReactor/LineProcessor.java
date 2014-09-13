@@ -1,15 +1,10 @@
 package pl.mjedynak.springReactor;
 
-import com.google.common.collect.ImmutableMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.mjedynak.PrimeFactorCounter;
 import reactor.core.Reactor;
 import reactor.event.Event;
 import reactor.function.Consumer;
-import reactor.tuple.Tuple;
-import reactor.tuple.Tuple2;
 
 import java.util.concurrent.Phaser;
 
@@ -34,9 +29,7 @@ public class LineProcessor implements Consumer<Event<String>> {
             }
         } catch (Exception e) {
             phaser.arrive();
-            Event.Headers headers = new Event.Headers(ImmutableMap.of("item", stringEvent.getData()));
-            Event<Exception> wrap = new Event<>(headers, e);
-            eventLoopDispatcherReactor.notify(Exception.class, wrap);
+            eventLoopDispatcherReactor.notify(Exception.class, Event.wrap(e));
         }
     }
 }
