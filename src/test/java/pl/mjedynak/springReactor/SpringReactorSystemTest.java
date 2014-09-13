@@ -20,7 +20,6 @@ public class SpringReactorSystemTest {
         new File(Bootstrap.SUMMARY_FILE).delete();
     }
 
-
     @Test
     public void shouldProcessFile() throws Exception {
         // when
@@ -37,6 +36,5 @@ public class SpringReactorSystemTest {
         assertThat(exceptionsFileContent, containsString("badData2"));
         assertThat(new File(Bootstrap.SUMMARY_FILE).exists(), is(true));
     }
-
 
 }
