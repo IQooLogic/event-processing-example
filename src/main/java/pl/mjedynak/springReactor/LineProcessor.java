@@ -17,8 +17,6 @@ import static pl.mjedynak.springReactor.Bootstrap.PROCESSED_EVENT;
 
 public class LineProcessor implements Consumer<Event<String>> {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Autowired private PrimeFactorCounter primeFactorCounter;
     @Autowired private Reactor eventLoopDispatcherReactor;
     @Autowired private Phaser phaser;
@@ -30,7 +28,6 @@ public class LineProcessor implements Consumer<Event<String>> {
             long value = Long.valueOf(line);
             if (value > 0) {
                 long factor = primeFactorCounter.primeFactors(value);
-    //            logger.debug("processed " + line + "," + factor + ", " + Thread.currentThread());
                 eventLoopDispatcherReactor.notify(PROCESSED_EVENT, Event.wrap(line + "," + factor));
             } else {
                 phaser.arrive();

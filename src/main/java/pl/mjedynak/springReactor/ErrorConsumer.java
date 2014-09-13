@@ -11,15 +11,12 @@ import java.io.IOException;
 
 public class ErrorConsumer implements Consumer<Event<Exception>> {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-
     @Override
     public void accept(Event<Exception> exceptionEvent) {
         try {
             FileUtils.write(new File(Bootstrap.EXCEPTIONS_FILE), exceptionEvent.getHeaders().get("item") + ", " + exceptionEvent.getData() + "\n", true);
-        } catch (IOException e1) {
-            throw new RuntimeException(e1);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
