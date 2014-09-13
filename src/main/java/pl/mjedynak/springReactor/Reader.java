@@ -24,14 +24,14 @@ public class Reader {
 
     public void read() throws Exception {
         File file = new File("numbers.txt");
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String line;
-        while ((line = br.readLine()) != null) {
-            phaser.register();
-            threadPoolDispatcherReactor.notify(READ_EVENT, Event.wrap(line));
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                phaser.register();
+                threadPoolDispatcherReactor.notify(READ_EVENT, Event.wrap(line));
+            }
+            logger.debug("finished reading");
         }
-        br.close();
-        logger.debug("finished reading");
     }
 
 }
